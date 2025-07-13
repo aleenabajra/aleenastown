@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EnPe Town - Scene 15</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f0f0f0;
+      height: 100vh;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+    }
+
+    #center {
+      width: 960px;
+      height: 540px;
+      position: fixed; 
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      background: transparent;
+      z-index: 1;
+    }
+
+    .bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .fade-in-container {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+      z-index: 2;
+    }
+
+    .fade-in-container.show {
+      opacity: 1;
+    }
+
+    .fade-in-container p {
+      font-size: 22px;
+      color: white;
+      text-shadow:
+        -2px -2px 4px #000,
+         2px -2px 4px #000,
+        -2px 2px 4px #000,
+         2px 2px 4px #000;
+      margin-bottom: 16px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 10px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .choice-button {
+      background-color: #de81c2;
+      color: white;
+      border: none;
+      padding: 12px 26px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      width: 100%;
+    }
+
+    .choice-button:hover {
+      background-color: #000000;
+      transform: scale(1.05);
+      transition: all 0.2s ease;
+    }
+
+    .bounce {
+      animation: softBounce 0.3s ease;
+    }
+
+    @keyframes softBounce {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.07); }
+      100% { transform: scale(1); }
+    }
+
+    .wrong {
+      background-color: red !important;
+      transition: background-color 0.2s ease;
+    }
+
+    .correct {
+      background-color: #2ecc71 !important;
+    }
+
+    #explanation {
+      color: white;
+      font-size: 18px;
+      margin-top: 24px;
+      text-shadow: -1px -1px 3px #000, 1px -1px 3px #000, -1px 1px 3px #000, 1px 1px 3px #000;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    #nextBtn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.6s ease, background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    #nextBtn.show {
+      opacity: 1;
+    }
+
+    #nextBtn:hover {
+      background-color: #1976D2;
+      transform: scale(1.05); 
+    }
+  </style>
+</head>
+<body>
+  <div id="center">
+    <img src="evening.jpg" alt="Background" class="bg" />
+
+    <div class="fade-in-container" id="fadeContent">
+      <p>What should you do if you see someone being bullied online?</p>
+
+      <div class="button-row">
+        <button class="choice-button" id="correct">A. Report it and support the person being bullied</button>
+        <button class="choice-button" id="wrong2">B. Ignore it</button>
+        <button class="choice-button" id="wrong1">C. Join in and make fun of them</button>
+      </div>
+
+      <div id="explanation"></div>
+      <a href="scene18.html"><button id="nextBtn">Next</button></a>
+    </div>
+  </div>
+
+  <audio id="buzzer" src="buzzer.mp3" preload="auto"></audio>
+  <audio id="tick" src="tick.mp3" preload="auto"></audio>
+  <script>
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById('fadeContent').classList.add('show');
+      }, 800);
+    };
+
+    const buzzer = document.getElementById("buzzer");
+    const wrongBtns = [
+      document.getElementById("wrong1"),
+      document.getElementById("wrong2")
+    ];
+    const correctBtn = document.getElementById("correct");
+    const nextBtn = document.getElementById("nextBtn");
+
+    wrongBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buzzer.pause();
+        buzzer.currentTime = 0;
+        buzzer.play().catch(e => console.log("Audio error:", e));
+        btn.classList.remove("wrong", "bounce");
+        void btn.offsetWidth;
+        btn.classList.add("wrong", "bounce");
+        setTimeout(() => btn.classList.remove("bounce"), 300);
+      });
+    });
+
+    correctBtn.addEventListener("click", () => {
+      const tick = document.getElementById("tick");
+      tick.pause();
+      tick.currentTime = 0;
+      tick.play().catch(e => console.log("Audio error:", e));
+      correctBtn.classList.remove("correct", "bounce", "wrong");
+      void correctBtn.offsetWidth;
+      correctBtn.classList.add("correct", "bounce");
+      nextBtn.classList.add("show");
+    });
+  </script>
+</body>
+</html>
+
+

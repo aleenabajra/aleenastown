@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EnPe Town - Scene 4</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      overflow: hidden;
+    }
+
+    .wrapper {
+      width: 960px;
+      height: 540px;
+      position: absolute; 
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .bg {
+      position: absolute;
+      width: 960px;
+      height: 540px;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .dim-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 960px;
+      height: 540px;
+      background-color: rgba(0, 0, 0, 0.2);
+      z-index: 0;
+    }
+
+    .mid-image,
+    .fade-overlay {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 520px;
+      height: 440px;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .mid-image {
+      z-index: 1;
+    }
+
+    .fade-overlay {
+      z-index: 2;
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .fade-out {
+      opacity: 0 !important;
+    }
+
+    .overlay {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      text-align: center;
+      padding-bottom: 60px;
+      background: rgba(255, 255, 255, 0.0);
+      z-index: 3;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .overlay.visible {
+      opacity: 1;
+    }
+
+    .overlay p {
+      font-size: 27px;
+      color: rgb(255, 255, 255);
+      text-shadow:
+        -1px -1px 0 #000000,
+         1px -1px 0 #000000,
+        -1px -1px 0 #000000,
+         1px -1px 0 #000000;
+      margin-bottom: 20px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .choice-button {
+      background-color: #de81c2;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .choice-button:hover {
+      background-color: #000000;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <img src="town.jpg" alt="Town" class="bg" />
+    <div class="dim-layer"></div>
+
+    <img src="mask.png" alt="Friend with Mask" class="mid-image" />
+    <img src="boy.png" alt="Overlay Image" class="fade-overlay" id="boyImage" />
+
+    <div class="overlay" id="textOverlay">
+      <p>It's your friend, Kayla! She looks kinda different.</p>
+      <div class="button-row">
+        <a href="scene4.html"><button class="choice-button">Maybe she changed her hair?</button></a>
+        <a href="scene4.html"><button class="choice-button">Why is she wearing a mask..</button></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = () => {
+      const boy = document.getElementById("boyImage");
+      const overlay = document.getElementById("textOverlay");
+
+      setTimeout(() => {
+        boy.classList.add("fade-out");
+
+        setTimeout(() => {
+          overlay.classList.add("visible");
+        }, 500);
+      }, 1000); 
+    };
+  </script>
+</body>
+</html>

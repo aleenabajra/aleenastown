@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EnPe Town - Scene 10 Fallback</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      background: #fff;
+    }
+
+    body {
+    }
+
+    #center {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 960px;
+      height: 540px;
+      border-radius: 0px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: url('nady.png') no-repeat center center;
+      background-size: cover;
+    }
+
+    #welcome-text,
+    #info-text,
+    #buttons-container {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #welcome-text {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 34px;
+      text-align: center;
+      text-shadow:
+        -2px -2px 4px #000,
+         2px -2px 4px #000,
+        -2px  2px 4px #000,
+         2px  2px 4px #000;
+      max-width: 90%;
+      z-index: 3;
+      pointer-events: auto;
+    }
+
+    #info-text {
+      position: absolute;
+      bottom: 250px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 24px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      text-align: center;
+      max-width: 80%;
+      z-index: 3;
+      pointer-events: auto;
+    }
+
+    #buttons-container {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 90%;
+      max-width: 700px;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    #buttons-container.visible {
+      opacity: 1 !important;
+      pointer-events: auto;
+    }
+
+    .choice-button {
+      padding: 14px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #de81c2;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .choice-button:hover {
+      background-color: #000000;
+      transform: scale(1.05); 
+    }
+
+    .wrong {
+      background-color: red !important;
+      transition: background-color 0.2s ease;
+    }
+    .mid-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 380px;
+      height: 350px;
+      object-fit: cover;
+      z-index: 1;
+      pointer-events: none;
+      animation: bounce-image 1.5s ease-in-out infinite;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes bounce-image {
+      0%, 100% {
+        transform: translate(-50%, -50%) translateY(0);
+      }
+      50% {
+        transform: translate(-50%, -50%) translateY(-20px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="center">
+    <img src="man.png" alt="man" class="mid-image" />
+    <div id="welcome-text">What do you do next?</div>
+    <div id="info-text">Choose your action carefully.</div>
+    <div id="buttons-container">
+      <button id="correctBtn" class="choice-button">I report the hate comments and block them.</button>
+      <button id="wrongBtn1" class="choice-button">I reply to all of them in his defense and start a fight.</button>
+      <button id="wrongBtn2" class="choice-button">I join in on the hatetrain since everyone's doing it.</button>
+    </div>
+  </div>
+
+  <!-- Buzzer sound -->
+  <audio id="buzzer" src="buzzer.mp3" preload="auto"></audio>
+
+  <script>
+    const welcomeText = document.getElementById('welcome-text');
+    const infoText = document.getElementById('info-text');
+    const buttonsContainer = document.getElementById('buttons-container');
+    const correctBtn = document.getElementById('correctBtn');
+    const wrongBtn1 = document.getElementById('wrongBtn1');
+    const wrongBtn2 = document.getElementById('wrongBtn2');
+    const buzzer = document.getElementById('buzzer');
+
+    setTimeout(() => { welcomeText.style.opacity = 1; }, 500);
+    setTimeout(() => { infoText.style.opacity = 1; }, 1500);
+    setTimeout(() => {
+      buttonsContainer.classList.add('visible');
+    }, 2500);
+
+    correctBtn.addEventListener('click', () => {
+      window.location.href = 'scene13.html';
+    });
+
+    function buzzWrong(button) {
+      buzzer.pause();
+      buzzer.currentTime = 0;
+      buzzer.play().catch(e => console.log("Audio error:", e));
+      
+      button.classList.remove('wrong');
+      void button.offsetWidth;
+      button.classList.add('wrong');
+
+      setTimeout(() => {
+        button.classList.remove('wrong');
+      }, 500);
+    }
+
+    wrongBtn1.addEventListener('click', () => {
+      buzzWrong(wrongBtn1);
+    });
+
+    wrongBtn2.addEventListener('click', () => {
+      buzzWrong(wrongBtn2);
+    });
+  </script>
+</body>
+</html>
+
+
+
+

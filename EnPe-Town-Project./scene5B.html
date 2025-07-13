@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EnPe Town - Scene 5A</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f0f0f0;
+      height: 100vh;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      overflow: hidden;
+    }
+
+    #center {
+      width: 960px;
+      height: 540px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dialogue-box {
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 3px solid greenyellow;
+      border-radius: 12px;
+      padding: 30px;
+      color: #fff;
+      text-align: center;
+      width: 80%;
+      margin: 40px auto 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .dialogue-box h2 {
+      color: #08ec41;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .dialogue-box p,
+    .dialogue-box li {
+      font-size: 18px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .dialogue-box ul {
+      list-style-type: disc;
+      padding-left: 0;
+    }
+
+    .dialogue-box ul li {
+      list-style-position: inside;
+    }
+
+    .bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .dim-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2);
+      z-index: -1;
+    }
+
+    .overlay {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    .choice-button {
+      background-color: #de81c2;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, opacity 1s ease;
+      opacity: 0;
+    }
+
+    .choice-button:hover {
+      background-color: #000000;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div id="center">
+    <div class="wrapper">
+      <img src="town.jpg" alt="Town" class="bg" />
+      <div class="dim-layer"></div>
+
+      <div class="dialogue-box">
+        <h2>Correct! You just faced <u>Impersonation</u>.</h2>
+        <p id="typing-text-1"></p>
+        <ul id="typing-list-1" style="display: none;">
+          <li>Ask for money/personal information</li>
+          <li>Gain your trust to scam/harm you</li>
+        </ul>
+        <p id="typing-text-2"></p>
+        <ul id="typing-list-2" style="display: none;">
+          <li>✅ Double-check - Message/call your real friend</li>
+          <li>❌ Don’t share personal info</li>
+          <li>⚠️ Look for red flags - Are they acting strange/rushing you?</li>
+          <li>🧠 Think - Real friends don’t pressure you</li>
+        </ul>
+      </div>
+
+      <div class="overlay">
+        <a href="scene6.html"><button class="choice-button" id="continue-button">Continue!</button></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const text1 = "Impersonation is when someone pretends to be someone you know to trick you. AI technology can create fake photos and even mimic voices, making it easier for scammers to imitate real people. ";
+    const text2 = "How to stay safe online:";
+
+    const textElement1 = document.getElementById("typing-text-1");
+    const list1 = document.getElementById("typing-list-1");
+    const textElement2 = document.getElementById("typing-text-2");
+    const list2 = document.getElementById("typing-list-2");
+    const continueButton = document.getElementById("continue-button");
+
+    let index = 0;
+    let speed = 10;
+
+    function typeText(element, text, callback) {
+      if (index < text.length) {
+        element.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(() => typeText(element, text, callback), speed);
+      } else {
+        index = 0;
+        callback();
+      }
+    }
+
+    function startTyping() {
+      typeText(textElement1, text1, () => {
+        list1.style.display = "block";
+        setTimeout(() => {
+          typeText(textElement2, text2, () => {
+            list2.style.display = "block";
+            setTimeout(() => {
+              continueButton.style.opacity = "1";
+            }, 500);
+          });
+        }, 300);
+      });
+    }
+
+    window.onload = startTyping;
+  </script>
+</body>
+</html>

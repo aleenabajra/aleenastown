@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to EnPe Town</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    #container {
+      width: 960px;
+      height: 540px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .bg {
+      position: absolute;
+      width: 960px;
+      height: 540px;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    h1 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 32px;
+      margin-top: 40px;
+      color: #ffffff;
+      text-shadow:
+        -2px -2px 4px #000,
+         2px -2px 4px #000,
+        -2px  2px 4px #000,
+         2px  2px 4px #000;
+    }
+
+    p {
+      font-size: 22px;
+      margin: 20px auto 40px auto;
+      color: #e893e1;
+      text-shadow:
+        -2px -2px 4px #000,
+         2px -2px 4px #000,
+        -2px  2px 4px #000,
+         2px  2px 4px #000;
+      max-width: 80%;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    #girl-image {
+      width: 280px;
+      height: auto;
+      animation: bounce 1.5s infinite;
+      display: block;
+      margin: 10px auto 0 auto;
+    }
+
+    #start-button {
+      padding: 18px 38px;
+      font-size: 18px;
+      font-family: 'Poppins', sans-serif;
+      background-color: #de81c2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin: 20px auto 0 auto;
+    }
+
+    #start-button:hover {
+      background-color: #000000;
+      transform: scale(1.05);
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <img src="blur.avif" alt="Town Background" class="bg" />
+    <h1>Hello, player!</h1>
+    <p>Are you ready to embark on a journey through the virtual <strong>EnPe Town</strong>?</p>
+    <img src="girl.png" alt="Girl Avatar" id="girl-image" />
+    <a href="scene1.html">
+      <button id="start-button">Let's Go!</button>
+    </a>
+  </div>
+</body>
+</html>
+
+

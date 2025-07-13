@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EnPe Town - Scene 8</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #f0f0f0;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      position: relative;
+    }
+
+    #center {
+      width: 960px;
+      height: 540px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    #board {
+      position: absolute;
+      width: 60%;
+      left: 20%;
+      top: 0;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #fadeText {
+      position: absolute;
+      bottom: 120px; 
+      width: 100%;
+      text-align: center;
+      font-size: 27px;
+      color: white;
+      text-shadow:
+        -2px -2px 4px #000,
+         2px -2px 4px #000,
+        -2px  2px 4px #000,
+         2px  2px 4px #000;
+      opacity: 0;
+      transition: opacity 1s ease;
+      z-index: 3;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .overlay {
+      position: absolute;
+      bottom: 60px; 
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+      z-index: 3;
+    }
+
+    .overlay.visible {
+      opacity: 1;
+    }
+
+    .choice-button {
+      background-color: #de81c2;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .choice-button:hover {
+      background-color: #000000;
+      transform: scale(1.05);
+      transition: all 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="center">
+    <img src="nature.png" alt="Nature Background" class="bg" />
+    <img src="hand.png" alt="Hand" id="board" />
+    <div id="fadeText">After doing some research, turns out it's fake news!</div>
+
+    <div class="overlay" id="continueOverlay">
+      <button class="choice-button" onclick="location.href='scene9.html'">Continue!</button>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      const board = document.getElementById('board');
+      const fadeText = document.getElementById('fadeText');
+      const continueOverlay = document.getElementById('continueOverlay');
+
+      setTimeout(() => { board.style.opacity = 1; }, 500);
+      setTimeout(() => { fadeText.style.opacity = 1; }, 1800);
+      setTimeout(() => { continueOverlay.classList.add('visible'); }, 3200);
+    };
+  </script>
+</body>
+</html>
+

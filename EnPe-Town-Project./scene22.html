@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to EnPe Town</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #f0f0f0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      /
+    }
+
+    #container {
+      width: 960px;
+      height: 540px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      text-align: center;
+      background-color: transparent;
+    }
+
+    .bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      z-index: 0; 
+    }
+
+    h1, p, #girl-image {
+      position: relative;
+      z-index: 1; 
+    }
+
+    h1 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 32px;
+      margin-top: 40px;
+      color: #f0f0f0;
+      text-shadow:
+        -2px -2px 4px #000,
+         2px -2px 4px #000,
+        -2px  2px 4px #000,
+         2px  2px 4px #000;
+    }
+
+    p {
+      font-size: 22px;
+      margin: 20px auto 40px auto;
+      color: #f2aee7;
+      max-width: 80%;
+      text-shadow:
+        -2px -2px 4px #000,
+         2px -2px 4px #000,
+        -2px  2px 4px #000,
+         2px  2px 4px #000;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    #girl-image {
+      width: 280px;
+      height: auto;
+      animation: bounce 1.5s infinite;
+      display: block;
+      margin: 2px auto 0 auto;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <img src="bus.jpeg" alt="Town Background" class="bg" />
+
+    <h1>Here's your ride home!</h1>
+    <p>Thanks for stopping by the virtual <strong>EnPe Town</strong>!</p>
+
+    <img src="girl.png" alt="Girl Avatar" id="girl-image" />
+  </div>
+</body>
+</html>
+
+
+
+
+
+
